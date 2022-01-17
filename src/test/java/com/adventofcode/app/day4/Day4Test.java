@@ -2,7 +2,9 @@ package com.adventofcode.app.day4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -48,11 +50,15 @@ public class Day4Test {
             for (Board board : boards) {
                 board.markNumberIfExists(digit);
                 if (board.isGameFinished()) {
-                    System.out.println("\nWinning board\n" + board);
-                    System.out.println(digit * board.countUnmarkedNumbersSum());
-                    return;
+                    System.out.println(digit*board.countUnmarkedNumbersSum());
+                    break;
                 }
             }
         }
+
+//        System.out.println("\nFirst winning board\n" + winningBoards.get(0));
+//        System.out.println(winningDigits.get(0) * winningBoards.get(0).countUnmarkedNumbersSum());
+//        System.out.println("\nLast winning board\n" + winningBoards.get(winningBoards.size()-1));
+//        System.out.println(winningDigits.get(winningDigits.size()-1) * winningBoards.get(winningBoards.size()-1).countUnmarkedNumbersSum());
     }
 }

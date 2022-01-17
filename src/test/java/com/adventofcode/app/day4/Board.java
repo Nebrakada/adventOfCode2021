@@ -14,7 +14,7 @@ public class Board {
     private BoardCell[][] cells = new BoardCell[5][5];
 
     public Board(List<String> rows) {
-        System.out.println("inside board: " + rows);
+//        System.out.println("inside board: " + rows);
         for (int row = 0; row < rows.size(); row++) {
             String[] rowElements = rows.get(row).trim().split("  ?");
             for (int col = 0; col < rowElements.length; col++) {
@@ -25,10 +25,10 @@ public class Board {
 
     @Override
     public String toString() {
-        return "Board{" +
-                "cells=" + Arrays.toString(cells) +
-                '}';
+        return "Board{" + Arrays.deepToString(cells) + "}\n";
     }
+
+
 
     public void markNumberIfExists(int number) {
         for (BoardCell[] row : cells) {
