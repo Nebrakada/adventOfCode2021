@@ -1,5 +1,6 @@
 package com.adventofcode.app.day4;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +59,9 @@ public class Board {
                 final BoardCell boardCell = cell[col];
                 columnMap.compute(col, (key, value) -> {
                     if (value == null) {
-                        return List.of(boardCell);
+                        List<BoardCell> boardCells = new ArrayList<>();
+                        boardCells.add(boardCell);
+                        return boardCells;
                     } else {
                         value.add(boardCell);
                         return value;
@@ -79,6 +82,10 @@ public class Board {
     }
 
     public int countUnmarkedNumbersSum() {
-        return 0;
+        return Arrays.stream(cells)
+                .flatMap(Arrays::stream)
+                .filter(cell -> !cell.isMarked)
+                .map(cell-> cell.value)
+                .reduce(0, Integer::sum);
     }
 }

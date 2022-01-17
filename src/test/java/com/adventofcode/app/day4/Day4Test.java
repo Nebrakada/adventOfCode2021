@@ -50,6 +50,7 @@ public class Day4Test {
                 if (board.isGameFinished()) {
                     System.out.println("\nWinning board\n" + board);
                     System.out.println(digit * board.countUnmarkedNumbersSum());
+                    return;
                 }
             }
         }
