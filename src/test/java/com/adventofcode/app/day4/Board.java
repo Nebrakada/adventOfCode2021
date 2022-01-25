@@ -13,6 +13,8 @@ public class Board {
 
     private BoardCell[][] cells = new BoardCell[5][5];
 
+    public boolean isFinished = false;
+
     public Board(List<String> rows) {
 //        System.out.println("inside board: " + rows);
         for (int row = 0; row < rows.size(); row++) {
@@ -82,6 +84,7 @@ public class Board {
     }
 
     public int countUnmarkedNumbersSum() {
+//        System.out.println("counting: " + this.toString());
         return Arrays.stream(cells)
                 .flatMap(Arrays::stream)
                 .filter(cell -> !cell.isMarked)

@@ -14,7 +14,7 @@ import com.adventofcode.app.TestData;
 public class Day4Test {
 
     @Test
-    void name() {
+    void day4part1() {
         List<String> data = TestData.getData4();
 
         List<Integer> digits = Arrays.stream(data.get(0).split(","))
@@ -46,19 +46,32 @@ public class Day4Test {
     }
 
     private void markSelectedNumbers(List<Integer> digits, List<Board> boards) {
+        List<Board> winBoards = new ArrayList<>();
+        List<Integer> winDigits = new ArrayList<>();
         for (Integer digit : digits) {
             for (Board board : boards) {
+                if (board.isFinished) {
+                    continue;
+                }
                 board.markNumberIfExists(digit);
                 if (board.isGameFinished()) {
-                    System.out.println(digit*board.countUnmarkedNumbersSum());
-                    break;
+                    int unmarkedSum = board.countUnmarkedNumbersSum();
+                    System.out.println(digit* unmarkedSum);
+                    winBoards.add(board);
+                    board.isFinished = true;
+                    if (!winDigits.contains(digit)) {
+                        winDigits.add(digit);
+                    }
+
                 }
             }
         }
 
-//        System.out.println("\nFirst winning board\n" + winningBoards.get(0));
-//        System.out.println(winningDigits.get(0) * winningBoards.get(0).countUnmarkedNumbersSum());
-//        System.out.println("\nLast winning board\n" + winningBoards.get(winningBoards.size()-1));
-//        System.out.println(winningDigits.get(winningDigits.size()-1) * winningBoards.get(winningBoards.size()-1).countUnmarkedNumbersSum());
+        Integer win1digit = winDigits.get(0);
+        System.out.println("win 1: " + win1digit);
+        Integer winLastDigit = winDigits.get(winDigits.size() - 1);
+        System.out.println("win last: " + winLastDigit);
+        System.out.println("result 1: " + win1digit * winBoards.get(0).countUnmarkedNumbersSum());
+        System.out.println("result last: " + winLastDigit * winBoards.get(winBoards.size() -1 ).countUnmarkedNumbersSum());
     }
 }
